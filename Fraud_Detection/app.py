@@ -3,18 +3,18 @@ import pandas as pd
 import numpy as np
 import joblib
 
-model = joblib.load('best_xgb_model.joblib')
-scaler = joblib.load('min_max_scaler.joblib')
-device_map = joblib.load('device_counts_map.joblib')
-top_18_countries = joblib.load('top_18_countries.joblib')
-time_bins = joblib.load('time_bins.joblib')
-time_labels = joblib.load('time_labels.joblib')
+model = joblib.load('models/best_xgb_model.joblib')
+scaler = joblib.load('models/min_max_scaler.joblib')
+device_map = joblib.load('encoders/device_counts_map.joblib')
+top_18_countries = joblib.load('encoders/top_18_countries.joblib')
+time_bins = joblib.load('encoders/time_bins.joblib')
+time_labels = joblib.load('encoders/time_labels.joblib')
 
-le_sex = joblib.load('le_sex.joblib')
-le_source = joblib.load('le_source.joblib')
-le_browser = joblib.load('le_browser.joblib')
-le_time_category = joblib.load('le_time_category.joblib')
-le_country = joblib.load('le_country.joblib')
+le_sex = joblib.load('encoders/le_sex.joblib')
+le_source = joblib.load('encoders/le_source.joblib')
+le_browser = joblib.load('encoders/le_browser.joblib')
+le_time_category = joblib.load('encoders/le_time_category.joblib')
+le_country = joblib.load('encoders/le_country.joblib')
 
 
 MODEL_FEATURES = [
