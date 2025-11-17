@@ -1,0 +1,2 @@
+user_id,signup_time,purchase_time,purchase_value,device_id,source,browser,sex,age,ip_address,class,lower_bound_ip_address,upper_bound_ip_address,country
+17540,7/26/2015 18:31,8/31/2015 2:53,17,VMORVQFSTQWBC,Ads,IE,M,40,1477500289,1,1476395008,1478492159,Spain

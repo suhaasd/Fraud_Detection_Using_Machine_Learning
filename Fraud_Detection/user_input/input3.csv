@@ -1,0 +1,2 @@
+user_id,signup_time,purchase_time,purchase_value,device_id,source,browser,sex,age,ip_address,class,lower_bound_ip_address,upper_bound_ip_address,country
+201313,1/6/2015 0:05,1/6/2015 0:05,15,KLCMFZVFBRYOP,Ads,Chrome,M,36,18191460.94,1,18153472,18219007,Japan

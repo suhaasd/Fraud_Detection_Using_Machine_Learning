@@ -1,0 +1,2 @@
+user_id,signup_time,purchase_time,purchase_value,device_id,source,browser,sex,age,ip_address,class,lower_bound_ip_address,upper_bound_ip_address,country
+298225,4/17/2015 1:41,5/27/2015 9:38,32,ZTMYBAOAWFXAM,Ads,FireFox,M,36,3095445925,0,3095396352,3096444927,United States
