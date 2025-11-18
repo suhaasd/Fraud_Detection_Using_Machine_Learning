@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="900" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="600" y="30" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    The Hour Encoding Problem: Linear vs Cyclical Time
+  </text>
+  
+  <!-- Problem Explanation Box -->
+  <rect x="50" y="50" width="500" height="120" fill="#ffe6e6" stroke="#cc0000" stroke-width="2" rx="5"/>
+  <text x="300" y="75" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#cc0000">
+    ❌ PROBLEM: Linear Hour Encoding
+  </text>
+  <text x="300" y="100" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#333">
+    Hour = 23 (11 PM) and Hour = 0 (12 AM) are 1 minute apart
+  </text>
+  <text x="300" y="120" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#333">
+    But treated as 23 units apart by the model!
+  </text>
+  <text x="300" y="145" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#cc0000">
+    Distance = |23 - 0| = 23 ⚠️
+  </text>
+  
+  <!-- Solution Box -->
+  <rect x="650" y="50" width="500" height="120" fill="#e6ffe6" stroke="#00cc00" stroke-width="2" rx="5"/>
+  <text x="900" y="75" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#00cc00">
+    ✓ SOLUTION: Cyclical Encoding
+  </text>
+  <text x="900" y="100" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#333">
+    hour_sin = sin(2π × hour / 24)
+  </text>
+  <text x="900" y="120" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#333">
+    hour_cos = cos(2π × hour / 24)
+  </text>
+  <text x="900" y="145" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#00cc00">
+    Preserves circular relationship! ✓
+  </text>
+  
+  <!-- Decision Tree with Linear Encoding -->
+  <text x="300" y="210" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    Decision Tree with Linear Hour Encoding
+  </text>
+  
+  <!-- Root Node -->
+  <ellipse cx="300" cy="260" rx="90" ry="40" fill="#3498db" stroke="#2c3e50" stroke-width="2"/>
+  <text x="300" y="255" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">
+    hour &lt; 12?
+  </text>
+  <text x="300" y="273" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">
+    Gini = 0.18
+  </text>
+  
+  <!-- Left Branch -->
+  <line x1="250" y1="295" x2="150" y2="350" stroke="#2c3e50" stroke-width="2"/>
+  <text x="185" y="320" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2c3e50">YES</text>
+  
+  <!-- Left Child - Morning/Day -->
+  <ellipse cx="150" cy="380" rx="85" ry="40" fill="#e74c3c" stroke="#2c3e50" stroke-width="2"/>
+  <text x="150" y="375" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">
+    0 AM - 11 AM
+  </text>
+  <text x="150" y="390" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">
+    Low fraud risk
+  </text>
+  
+  <!-- Right Branch -->
+  <line x1="350" y1="295" x2="450" y2="350" stroke="#2c3e50" stroke-width="2"/>
+  <text x="415" y="320" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2c3e50">NO</text>
+  
+  <!-- Right Child - needs split -->
+  <ellipse cx="450" cy="380" rx="90" ry="40" fill="#3498db" stroke="#2c3e50" stroke-width="2"/>
+  <text x="450" y="375" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">
+    hour &lt; 18?
+  </text>
+  <text x="450" y="390" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">
+    Gini = 0.35
+  </text>
+  
+  <!-- Right-Left: Afternoon -->
+  <line x1="400" y1="415" x2="350" y2="470" stroke="#2c3e50" stroke-width="2"/>
+  <text x="360" y="440" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2c3e50">YES</text>
+  <ellipse cx="350" cy="500" rx="85" ry="40" fill="#e74c3c" stroke="#2c3e50" stroke-width="2"/>
+  <text x="350" y="495" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">
+    12 PM - 5 PM
+  </text>
+  <text x="350" y="510" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">
+    Low fraud risk
+  </text>
+  
+  <!-- Right-Right: Evening/Night - PROBLEM AREA -->
+  <line x1="500" y1="415" x2="550" y2="470" stroke="#2c3e50" stroke-width="2"/>
+  <text x="540" y="440" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2c3e50">NO</text>
+  <ellipse cx="550" cy="500" rx="85" ry="40" fill="#27ae60" stroke="#2c3e50" stroke-width="2"/>
+  <text x="550" y="490" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">
+    6 PM - 11 PM
+  </text>
+  <text x="550" y="505" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">
+    (hour 18-23)
+  </text>
+  <text x="550" y="520" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">
+    HIGH FRAUD ⚠️
+  </text>
+  
+  <!-- Problem Annotation -->
+  <rect x="150" y="560" width="400" height="100" fill="#fff9e6" stroke="#ff9900" stroke-width="2" rx="5"/>
+  <text x="350" y="585" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#ff9900">
+    ⚠️ THE PROBLEM ⚠️
+  </text>
+  <text x="350" y="608" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">
+    Hour 23 (11 PM) → High fraud risk ✓ CORRECT
+  </text>
+  <text x="350" y="628" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">
+    Hour 0 (12 AM) → Low fraud risk ✗ WRONG!
+  </text>
+  <text x="350" y="648" font-family="Arial, sans-serif" font-size="11" font-style="italic" text-anchor="middle" fill="#666">
+    12 AM should also be high risk (it's 1 minute after 11 PM!)
+  </text>
+  
+  <!-- Visual Timeline -->
+  <text x="900" y="210" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    Time Similarity Visualization
+  </text>
+  
+  <!-- Linear representation problem -->
+  <rect x="650" y="230" width="500" height="180" fill="#fff" stroke="#666" stroke-width="1" rx="5"/>
+  <text x="900" y="255" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">
+    Linear Hour Scale (0-23)
+  </text>
+  
+  <!-- Number line -->
+  <line x1="680" y1="290" x2="1120" y2="290" stroke="#333" stroke-width="2"/>
+  
+  <!-- Hour markers -->
+  <line x1="680" y1="285" x2="680" y2="295" stroke="#333" stroke-width="2"/>
+  <text x="680" y="310" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#333">0</text>
+  <text x="680" y="325" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">(12 AM)</text>
+  
+  <line x1="900" y1="285" x2="900" y2="295" stroke="#333" stroke-width="2"/>
+  <text x="900" y="310" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#333">12</text>
+  <text x="900" y="325" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">(12 PM)</text>
+  
+  <line x1="1120" y1="285" x2="1120" y2="295" stroke="#333" stroke-width="2"/>
+  <text x="1120" y="310" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#333">23</text>
+  <text x="1120" y="325" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">(11 PM)</text>
+  
+  <!-- Highlight the problem -->
+  <circle cx="680" cy="290" r="8" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+  <circle cx="1120" cy="290" r="8" fill="#27ae60" stroke="#229954" stroke-width="2"/>
+  
+  <!-- Distance arrow -->
+  <path d="M 690 350 L 1110 350" stroke="#cc0000" stroke-width="3" fill="none" marker-end="url(#arrowred)"/>
+  <path d="M 1110 350 L 690 350" stroke="#cc0000" stroke-width="3" fill="none" marker-start="url(#arrowred)"/>
+  <text x="900" y="345" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#cc0000">
+    Distance = 23 (MAXIMUM!)
+  </text>
+  <text x="900" y="370" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#cc0000">
+    Model thinks these hours are VERY different
+  </text>
+  <text x="900" y="390" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#cc0000">
+    But they're only 1 minute apart in reality! ⚠️
+  </text>
+  
+  <!-- Clock diagram -->
+  <text x="900" y="440" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">
+    Circular Time (Reality)
+  </text>
+  
+  <!-- Clock circle -->
+  <circle cx="900" cy="550" r="100" fill="#fff" stroke="#333" stroke-width="3"/>
+  
+  <!-- 12 o'clock marker -->
+  <line x1="900" y1="450" x2="900" y2="470" stroke="#333" stroke-width="3"/>
+  <text x="900" y="445" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#333">12</text>
+  
+  <!-- 6 o'clock marker -->
+  <line x1="900" y1="630" x2="900" y2="650" stroke="#333" stroke-width="3"/>
+  <text x="900" y="665" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#333">6</text>
+  
+  <!-- 3 o'clock marker -->
+  <line x1="980" y1="550" x2="1000" y2="550" stroke="#333" stroke-width="3"/>
+  <text x="1015" y="555" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#333">3</text>
+  
+  <!-- 9 o'clock marker -->
+  <line x1="800" y1="550" x2="820" y2="550" stroke="#333" stroke-width="3"/>
+  <text x="785" y="555" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#333">9</text>
+  
+  <!-- Midnight point (12 AM / 0) -->
+  <circle cx="900" cy="460" r="10" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+  <text x="945" y="465" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#e74c3c">0 (12 AM)</text>
+  
+  <!-- 11 PM point (23) -->
+  <circle cx="855" cy="475" r="10" fill="#27ae60" stroke="#229954" stroke-width="2"/>
+  <text x="780" y="475" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="end" fill="#27ae60">23 (11 PM)</text>
+  
+  <!-- Arc showing closeness -->
+  <path d="M 855 475 A 100 100 0 0 1 900 460" stroke="#00cc00" stroke-width="4" fill="none"/>
+  <text x="900" y="420" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#00cc00">
+    Actually close! (~15° apart)
+  </text>
+  
+  <!-- Legend -->
+  <rect x="50" y="700" width="1100" height="180" fill="#f8f9fa" stroke="#333" stroke-width="1" rx="5"/>
+  <text x="600" y="730" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    Why This Matters for Fraud Detection
+  </text>
+  
+  <text x="80" y="760" font-family="Arial, sans-serif" font-size="13" text-anchor="start" fill="#333">
+    🔴 Problem: Your fraud pattern shows high fraud risk from 10 PM to 2 AM (hours 22, 23, 0, 1, 2)
+  </text>
+  <text x="80" y="785" font-family="Arial, sans-serif" font-size="13" text-anchor="start" fill="#333">
+    ❌ With linear encoding: Model sees hour=23 and hour=0 as maximally different
+  </text>
+  <text x="100" y="805" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="#666">
+    • Decision tree splits: [hour &lt; 12] puts 11 PM and 12 AM in different branches
+  </text>
+  <text x="100" y="825" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="#666">
+    • Result: 11 PM → "high fraud", 12 AM → "low fraud" (WRONG!)
+  </text>
+  
+  <text x="80" y="850" font-family="Arial, sans-serif" font-size="13" text-anchor="start" fill="#00cc00">
+    ✅ With cyclical encoding: Model correctly groups nearby hours together
+  </text>
+  <text x="100" y="870" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="#666">
+    • sin/cos transformation preserves circular relationship
+  </text>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowred" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#cc0000"/>
+    </marker>
+  </defs>
+</svg>

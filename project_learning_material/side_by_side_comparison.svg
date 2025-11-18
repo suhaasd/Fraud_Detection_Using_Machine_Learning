@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1400" height="800" xmlns="http://www.w3.org/2000/svg">
+  
+  <!-- Title -->
+  <text x="700" y="35" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    Side-by-Side Comparison: Same Transaction, Different Encodings
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="700" y="65" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#666">
+    Transaction at 12:30 AM (30 minutes after midnight) - Known high fraud time
+  </text>
+  
+  <!-- Dividing line -->
+  <line x1="700" y1="90" x2="700" y2="780" stroke="#95a5a6" stroke-width="3" stroke-dasharray="10,5"/>
+  
+  <!-- LEFT SIDE: Linear Encoding -->
+  <rect x="20" y="90" width="660" height="680" fill="#ffe6e6" stroke="#e74c3c" stroke-width="3" rx="10"/>
+  
+  <text x="350" y="125" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#e74c3c">
+    ❌ LINEAR ENCODING (hour = 0.5)
+  </text>
+  
+  <!-- Transaction box -->
+  <rect x="50" y="150" width="600" height="80" fill="#fff" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="350" y="175" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">
+    Input Features:
+  </text>
+  <text x="350" y="195" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#333">
+    hour = 0.5 | age = 28 | purchase_value = 150 | country = China
+  </text>
+  <text x="350" y="215" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">
+    Time: 12:30 AM (should be HIGH FRAUD based on pattern)
+  </text>
+  
+  <!-- Linear decision tree -->
+  <ellipse cx="350" cy="290" rx="80" ry="35" fill="#3498db" stroke="#2c3e50" stroke-width="2"/>
+  <text x="350" y="285" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">
+    hour &lt; 12?
+  </text>
+  <text x="350" y="300" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">
+    0.5 &lt; 12?
+  </text>
+  
+  <line x1="290" y1="320" x2="200" y2="380" stroke="#2c3e50" stroke-width="2"/>
+  <text x="230" y="345" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#27ae60">TRUE</text>
+  <text x="230" y="360" font-family="Arial, sans-serif" font-size="9" fill="#666">(YES)</text>
+  
+  <ellipse cx="200" cy="410" rx="80" ry="35" fill="#3498db" stroke="#2c3e50" stroke-width="2"/>
+  <text x="200" y="405" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">
+    hour &lt; 6?
+  </text>
+  <text x="200" y="420" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">
+    0.5 &lt; 6?
+  </text>
+  
+  <line x1="140" y1="440" x2="100" y2="500" stroke="#2c3e50" stroke-width="2"/>
+  <text x="105" y="465" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#27ae60">TRUE</text>
+  
+  <ellipse cx="100" cy="530" rx="75" ry="35" fill="#3498db" stroke="#2c3e50" stroke-width="2"/>
+  <text x="100" y="525" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">
+    hour &lt; 3?
+  </text>
+  <text x="100" y="540" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">
+    0.5 &lt; 3?
+  </text>
+  
+  <line x1="60" y1="560" x2="100" y2="620" stroke="#2c3e50" stroke-width="2"/>
+  <text x="65" y="585" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#27ae60">TRUE</text>
+  
+  <!-- WRONG PREDICTION -->
+  <rect x="40" y="640" width="200" height="100" fill="#d5f4e6" stroke="#27ae60" stroke-width="3" rx="5"/>
+  <text x="140" y="665" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#27ae60">
+    🟢 LEGITIMATE
+  </text>
+  <text x="140" y="685" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#333">
+    Early morning hours
+  </text>
+  <text x="140" y="702" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#666">
+    Fraud rate: 4%
+  </text>
+  <text x="140" y="720" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#666">
+    Prediction: LOW RISK
+  </text>
+  
+  <!-- Error annotation -->
+  <rect x="280" y="640" width="350" height="100" fill="#fff9e6" stroke="#f39c12" stroke-width="2" rx="5"/>
+  <text x="455" y="665" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#f39c12">
+    ⚠️ WRONG PREDICTION!
+  </text>
+  <text x="455" y="685" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">
+    12:30 AM is part of high-fraud
+  </text>
+  <text x="455" y="702" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">
+    late-night period (10 PM - 2 AM)
+  </text>
+  <text x="455" y="720" font-family="Arial, sans-serif" font-size="11" font-style="italic" text-anchor="middle" fill="#e74c3c">
+    But tree separated it from hour 23!
+  </text>
+  
+  <!-- RIGHT SIDE: Cyclical Encoding -->
+  <rect x="720" y="90" width="660" height="680" fill="#e6ffe6" stroke="#27ae60" stroke-width="3" rx="10"/>
+  
+  <text x="1050" y="125" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#27ae60">
+    ✓ CYCLICAL ENCODING (sin/cos)
+  </text>
+  
+  <!-- Transaction box -->
+  <rect x="750" y="150" width="600" height="80" fill="#fff" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="1050" y="175" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">
+    Input Features (Transformed):
+  </text>
+  <text x="1050" y="195" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#333">
+    hour_sin = 0.130 | hour_cos = 0.991 | age = 28 | value = 150
+  </text>
+  <text x="1050" y="215" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">
+    sin(2π×0.5/24) = 0.130, cos(2π×0.5/24) = 0.991
+  </text>
+  
+  <!-- Cyclical decision tree -->
+  <ellipse cx="1050" cy="290" rx="100" ry="35" fill="#3498db" stroke="#2c3e50" stroke-width="2"/>
+  <text x="1050" y="282" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">
+    hour_cos &gt; 0.85?
+  </text>
+  <text x="1050" y="297" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">
+    (Near midnight?)
+  </text>
+  <text x="1050" y="309" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">
+    0.991 &gt; 0.85?
+  </text>
+  
+  <line x1="1000" y1="320" x2="900" y2="380" stroke="#2c3e50" stroke-width="2"/>
+  <text x="935" y="345" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#c0392b">FALSE</text>
+  <rect x="820" y="395" width="160" height="60" fill="#e8f8f5" stroke="#16a085" stroke-width="2" rx="5"/>
+  <text x="900" y="418" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#333">
+    Other times of day
+  </text>
+  <text x="900" y="435" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#666">
+    (Not shown in detail)
+  </text>
+  
+  <line x1="1100" y1="320" x2="1200" y2="380" stroke="#2c3e50" stroke-width="2"/>
+  <text x="1165" y="345" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#27ae60">TRUE</text>
+  <text x="1165" y="360" font-family="Arial, sans-serif" font-size="9" fill="#666">(YES!)</text>
+  
+  <ellipse cx="1200" cy="410" rx="100" ry="35" fill="#3498db" stroke="#2c3e50" stroke-width="2"/>
+  <text x="1200" y="402" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">
+    hour_sin &lt; 0?
+  </text>
+  <text x="1200" y="417" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">
+    (Before/after midnight)
+  </text>
+  <text x="1200" y="429" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">
+    0.130 &lt; 0?
+  </text>
+  
+  <line x1="1150" y1="440" x2="1080" y2="500" stroke="#2c3e50" stroke-width="2"/>
+  <text x="1100" y="465" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#27ae60">TRUE</text>
+  <rect x="990" y="515" width="180" height="70" fill="#ffe6e6" stroke="#e74c3c" stroke-width="2" rx="5"/>
+  <text x="1080" y="540" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#e74c3c">
+    🔴 HIGH FRAUD
+  </text>
+  <text x="1080" y="560" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#666">
+    Hours 22-23 (10-11 PM)
+  </text>
+  <text x="1080" y="575" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#666">
+    Fraud rate: 78%
+  </text>
+  
+  <line x1="1250" y1="440" x2="1280" y2="500" stroke="#2c3e50" stroke-width="2"/>
+  <text x="1280" y="465" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#c0392b">FALSE</text>
+  
+  <!-- CORRECT PREDICTION -->
+  <rect x="1190" y="515" width="180" height="70" fill="#ffe6e6" stroke="#e74c3c" stroke-width="3" rx="5"/>
+  <text x="1280" y="540" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#e74c3c">
+    🔴 HIGH FRAUD
+  </text>
+  <text x="1280" y="560" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#666">
+    Hours 0-2 (12-2 AM)
+  </text>
+  <text x="1280" y="575" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#666">
+    Fraud rate: 81%
+  </text>
+  
+  <!-- Success annotation -->
+  <rect x="750" y="640" width="600" height="100" fill="#e8f8f5" stroke="#16a085" stroke-width="3" rx="5"/>
+  <text x="1050" y="665" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#16a085">
+    ✓ CORRECT PREDICTION!
+  </text>
+  <text x="1050" y="685" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">
+    Transaction at 12:30 AM correctly identified as HIGH FRAUD
+  </text>
+  <text x="1050" y="705" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">
+    The tree successfully grouped midnight with late evening (22-23)
+  </text>
+  <text x="1050" y="725" font-family="Arial, sans-serif" font-size="11" font-style="italic" text-anchor="middle" fill="#27ae60">
+    Because cos(0.5) = 0.991 is close to cos(23) = 0.966!
+  </text>
+  
+  <!-- Bottom comparison table -->
+  <rect x="50" y="790" width="1300" height="1" fill="#95a5a6"/>
+  
+</svg>
