@@ -190,23 +190,6 @@ SMOTE timing matters: creating synthetic minority samples before splitting cause
 
 Model explainability (future): add SHAP plots or feature contribution breakdown to help stakeholders understand high-risk flags.
 
-
-## 👨‍💻 Author
-
-**Suhaas D**  
-Masters in Computer Science Student  
-Manipal School of Information Sciences
-
-- GitHub: [@suhaasd](https://github.com/suhaasd)
-- LinkedIn: [suhaasd](https://www.linkedin.com/in/suhaasd/)
-- Email: suhaasdmurthy@gmail.com
-
-## 🙏 Acknowledgments
-
-- Manipal School of Information Sciences for academic support
-- XGBoost and Gradio communities for excellent documentation
-- Dataset providers for enabling research in fraud detection
-
 ## 📊 Results & Insights
 
 The fraud detection system demonstrates:
